@@ -300,10 +300,10 @@ if (codeLayer) {
   });
 }
 (async function loadGithubStats() {
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
   try {
-    const res = await fetch('/.netlify/functions/github-stats');
+    const res = await fetch('https://eadweardly.netlify.app/.netlify/functions/github-stats');
     const data = await res.json();
-    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
     set('gh-repos', data.public_repos ?? '—');
     set('gh-stars', data.total_stars ?? '—');
     set('gh-followers', data.followers ?? '—');
