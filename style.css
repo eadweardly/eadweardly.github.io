@@ -53,7 +53,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   background: var(--bg);
   color: var(--text);
   transition: background .4s, color .4s;
@@ -129,7 +129,7 @@ body::after {
   -webkit-backdrop-filter: var(--blur-heavy);
 }
 .mobile-brand {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-weight: 800;
   font-size: 1.4rem;
   background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
@@ -197,7 +197,7 @@ body::after {
   background: var(--nav-active-bg);
 }
 .profile-name {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: .85rem;
   font-weight: 700;
   color: var(--text);
@@ -328,7 +328,7 @@ body::after {
   margin-bottom: .4rem;
 }
 .section-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 2rem;
   font-weight: 800;
   color: var(--text);
@@ -341,7 +341,7 @@ body::after {
   background-clip: text;
 }
 .hero-heading {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 2.4rem;
   font-weight: 800;
   line-height: 1.1;
@@ -633,7 +633,7 @@ body::after {
   box-shadow: 0 4px 16px rgba(106,90,205,0.4);
 }
 .card-icon-header h5 {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: .95rem;
   font-weight: 700;
   color: var(--text);
@@ -702,7 +702,7 @@ body::after {
   box-shadow: 0 2px 10px rgba(106,90,205,0.35);
 }
 .timeline-degree {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: .95rem;
   font-weight: 700;
   color: var(--text);
@@ -814,7 +814,7 @@ body::after {
   margin-bottom: .5rem;
 }
 .project-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.1rem; font-weight: 800;
   color: var(--text); margin-bottom: .6rem;
 }
@@ -881,7 +881,7 @@ body::after {
   border: 1.5px solid var(--input-border);
   border-radius: 12px;
   padding: .65rem 1rem;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: .875rem;
   color: var(--text);
   outline: none;
@@ -901,7 +901,7 @@ body::after {
   border-radius: 30px; border: none;
   background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
   color: #fff;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: .88rem; font-weight: 700;
   cursor: pointer; transition: all .3s;
   box-shadow: 0 4px 20px rgba(106,90,205,0.35), inset 0 1px 0 rgba(255,255,255,0.2);
@@ -1129,7 +1129,7 @@ body::after {
 .project-thumb-btn:hover { background: rgba(255,255,255,0.35); transform: scale(1.12); color: #fff; }
 .project-grid-body { padding: 1.25rem; }
 .project-grid-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1rem; font-weight: 800;
   color: var(--text); margin-bottom: .4rem;
 }
@@ -1170,7 +1170,7 @@ body::after {
   box-shadow: 0 4px 16px rgba(106,90,205,0.35);
 }
 .cert-name {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: .92rem; font-weight: 800;
   color: var(--text); margin-bottom: .3rem;
 }
@@ -1200,7 +1200,7 @@ body::after {
   background: var(--card-bg);
   border: 1.5px solid var(--accent);
   color: var(--accent);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: .85rem; font-weight: 700;
   text-decoration: none;
   transition: all .25s;
@@ -1214,7 +1214,7 @@ body::after {
   box-shadow: 0 8px 28px rgba(106,90,205,0.4);
 }
 .github-stat-num {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 1.6rem;
   font-weight: 800;
   background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
@@ -1248,7 +1248,7 @@ body::after {
   pointer-events: none;
 }
 .loader-name {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 2rem;
   font-weight: 800;
   background: linear-gradient(135deg, #6a5acd, #818cf8);
@@ -1303,7 +1303,7 @@ body::after {
   color: var(--text-muted);
   cursor: pointer;
   transition: all .2s;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 .lang-btn.active {
   background: linear-gradient(135deg, #6a5acd, #818cf8);
@@ -1370,7 +1370,7 @@ body::after {
   gap: 1px;
 }
 .manila-time {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: .85rem;
   font-weight: 700;
   color: var(--accent);
@@ -1452,7 +1452,7 @@ body::after {
   margin-bottom: .4rem;
 }
 .career-tl-title {
-  font-family: 'Syne', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: .82rem;
   font-weight: 800;
   color: var(--text);
