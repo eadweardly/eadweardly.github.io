@@ -454,15 +454,6 @@ function setLang(lang) {
   s('github-title-el', t['github-title']); s('github-btn-el', t['github-btn']);
   s('techstack-title-el', t['techstack-title']);
   s('radar-title-el', t['radar-title']);
-  s('timeline-eyebrow-el', t['timeline-eyebrow']);
-  s('timeline-title-el', t['timeline-title']);
-  s('tl-1-title-el', t['tl-1-title']); s('tl-1-desc-el', t['tl-1-desc']);
-  s('tl-2-title-el', t['tl-2-title']); s('tl-2-desc-el', t['tl-2-desc']);
-  s('tl-3-title-el', t['tl-3-title']); s('tl-3-desc-el', t['tl-3-desc']);
-  s('tl-4-title-el', t['tl-4-title']); s('tl-4-desc-el', t['tl-4-desc']);
-  s('tl-5-title-el', t['tl-5-title']); s('tl-5-desc-el', t['tl-5-desc']);
-  s('tl-6-title-el', t['tl-6-title']); s('tl-6-desc-el', t['tl-6-desc']);
-  document.querySelectorAll('.nav-link-timeline').forEach(el => el.childNodes[1].textContent = ' ' + t['nav-timeline']);
   s('gh-label-repos', t['gh-label-repos']); s('gh-label-stars', t['gh-label-stars']);
   s('gh-label-followers', t['gh-label-followers']); s('gh-label-forks', t['gh-label-forks']);
   s('edu-eyebrow-el', t['edu-eyebrow']); s('edu-title-el', t['edu-title']);
