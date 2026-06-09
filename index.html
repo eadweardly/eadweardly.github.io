@@ -12,6 +12,15 @@
   <link href="style.css" rel="stylesheet" />
 </head>
 <body data-bs-spy="scroll" data-bs-target="#sidebar-nav" data-bs-offset="80">
+  <div id="loader">
+    <div class="loader-name">ECF</div>
+    <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+    <div class="loader-dots">
+      <div class="loader-dot"></div>
+      <div class="loader-dot"></div>
+      <div class="loader-dot"></div>
+    </div>
+  </div>
   <div class="scroll-progress" id="scrollProgress"></div>
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
@@ -42,15 +51,15 @@
         </div>
         <nav id="mobile-nav" class="sidebar-nav">
           <a href="#home" class="nav-link active" data-bs-dismiss="offcanvas"><i class="bi bi-house-door-fill"></i> Home</a>
-          <a href="#about" class="nav-link" data-bs-dismiss="offcanvas"><i class="bi bi-person-fill"></i> About Me</a>
-          <a href="#education" class="nav-link" data-bs-dismiss="offcanvas"><i class="bi bi-mortarboard-fill"></i> Education</a>
-          <a href="#skills" class="nav-link" data-bs-dismiss="offcanvas"><i class="bi bi-code-slash"></i> Skills</a>
-          <a href="#projects" class="nav-link" data-bs-dismiss="offcanvas"><i class="bi bi-folder-fill"></i> Projects</a>
-          <a href="#certificates" class="nav-link" data-bs-dismiss="offcanvas"><i class="bi bi-patch-check-fill"></i> Certificates</a>
-          <a href="#contact" class="nav-link" data-bs-dismiss="offcanvas"><i class="bi bi-envelope-fill"></i> Contact</a>
+          <a href="#about" class="nav-link nav-link-about" data-bs-dismiss="offcanvas"><i class="bi bi-person-fill"></i> About Me</a>
+          <a href="#education" class="nav-link nav-link-edu" data-bs-dismiss="offcanvas"><i class="bi bi-mortarboard-fill"></i> Education</a>
+          <a href="#skills" class="nav-link nav-link-skills" data-bs-dismiss="offcanvas"><i class="bi bi-code-slash"></i> Skills</a>
+          <a href="#projects" class="nav-link nav-link-projects" data-bs-dismiss="offcanvas"><i class="bi bi-folder-fill"></i> Projects</a>
+          <a href="#certificates" class="nav-link nav-link-certs" data-bs-dismiss="offcanvas"><i class="bi bi-patch-check-fill"></i> Certificates</a>
+          <a href="#contact" class="nav-link nav-link-contact" data-bs-dismiss="offcanvas"><i class="bi bi-envelope-fill"></i> Contact</a>
         </nav>
         <div class="sidebar-social">
-          <p class="social-label">Let's connect</p>
+          <p class="social-label sidebar-connect-el">Let's connect</p>
           <div class="social-icons">
             <a href="https://github.com/eadweardly" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://www.facebook.com/share/1CuwSgeRq3/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -81,12 +90,12 @@
       </div>
       <nav id="sidebar-nav" class="sidebar-nav">
         <a href="#home" class="nav-link active"><i class="bi bi-house-door-fill"></i> Home</a>
-        <a href="#about" class="nav-link"><i class="bi bi-person-fill"></i> About Me</a>
-        <a href="#education" class="nav-link"><i class="bi bi-mortarboard-fill"></i> Education</a>
-        <a href="#skills" class="nav-link"><i class="bi bi-code-slash"></i> Skills</a>
-        <a href="#projects" class="nav-link"><i class="bi bi-folder-fill"></i> Projects</a>
-        <a href="#certificates" class="nav-link"><i class="bi bi-patch-check-fill"></i> Certificates</a>
-        <a href="#contact" class="nav-link"><i class="bi bi-envelope-fill"></i> Contact</a>
+        <a href="#about" class="nav-link nav-link-about"><i class="bi bi-person-fill"></i> About Me</a>
+        <a href="#education" class="nav-link nav-link-edu"><i class="bi bi-mortarboard-fill"></i> Education</a>
+        <a href="#skills" class="nav-link nav-link-skills"><i class="bi bi-code-slash"></i> Skills</a>
+        <a href="#projects" class="nav-link nav-link-projects"><i class="bi bi-folder-fill"></i> Projects</a>
+        <a href="#certificates" class="nav-link nav-link-certs"><i class="bi bi-patch-check-fill"></i> Certificates</a>
+        <a href="#contact" class="nav-link nav-link-contact"><i class="bi bi-envelope-fill"></i> Contact</a>
       </nav>
       <div class="sidebar-social">
         <p class="social-label">Let's connect</p>
@@ -105,6 +114,12 @@
           <label for="desktopThemeToggle" class="theme-toggle-label"></label>
         </div>
       </div>
+      <div class="lang-toggle-wrap">
+        <i class="bi bi-translate theme-icon"></i>
+        <button class="lang-btn active" id="btnEN" onclick="setLang('en')">EN</button>
+        <span class="lang-divider">|</span>
+        <button class="lang-btn" id="btnFIL" onclick="setLang('fil')">FIL</button>
+      </div>
     </div>
   </aside>
   <main class="main-content">
@@ -112,7 +127,7 @@
       <div class="container-fluid h-100">
         <div class="row h-100 align-items-center">
           <div class="col-lg-7">
-            <p class="section-eyebrow">WELCOME TO MY PORTFOLIO</p>
+            <p class="section-eyebrow" id="hero-eyebrow-el">WELCOME TO MY PORTFOLIO</p>
             <h1 class="hero-heading">
               Hi, I'm<br>
               <span class="hero-name gradient-text">Eduardo Charles Florencio Guevarra</span>
@@ -121,16 +136,14 @@
               <span id="typed-text"></span><span class="typed-cursor">|</span>
             </p>
             <p class="hero-intro">
-              I'm currently studying Information Technology and<br>
-              building things through code.<br>
-              I turn ideas into simple, functional, and meaningful digital experiences.
+              <span id="hero-intro-el">I'm currently studying Information Technology and building things through code. I turn ideas into simple, functional, and meaningful digital experiences.</span>
             </p>
             <div class="mt-4 d-flex gap-3 flex-wrap align-items-center">
               <a href="#contact" class="btn-submit text-decoration-none" style="padding:.6rem 1.4rem;font-size:.85rem">
-                <i class="bi bi-send-fill me-2"></i>Hire Me
+                <span id="hero-hire-btn"><i class="bi bi-send-fill me-2"></i>Hire Me</span>
               </a>
               <a href="#" class="btn-cv" download>
-                <i class="bi bi-download"></i> Download CV
+                <span id="hero-cv-btn"><i class="bi bi-download"></i> Download CV</span>
               </a>
             </div>
           </div>
@@ -156,8 +169,8 @@
             <a href="#about" class="quick-card">
               <i class="bi bi-person-fill quick-icon"></i>
               <div>
-                <strong>About Me</strong>
-                <p>Get to know more about me and my background.</p>
+                <strong id="qcard-about-title">About Me</strong>
+                <p id="qcard-about-desc">Get to know more about me and my background.</p>
               </div>
               <i class="bi bi-arrow-right arrow-icon"></i>
             </a>
@@ -166,8 +179,8 @@
             <a href="#education" class="quick-card">
               <i class="bi bi-mortarboard-fill quick-icon"></i>
               <div>
-                <strong>Education</strong>
-                <p>My academic journey and achievements.</p>
+                <strong id="qcard-edu-title">Education</strong>
+                <p id="qcard-edu-desc">My academic journey and achievements.</p>
               </div>
               <i class="bi bi-arrow-right arrow-icon"></i>
             </a>
@@ -176,8 +189,8 @@
             <a href="#skills" class="quick-card">
               <i class="bi bi-code-slash quick-icon"></i>
               <div>
-                <strong>Skills</strong>
-                <p>Technologies and tools I work with.</p>
+                <strong id="qcard-skills-title">Skills</strong>
+                <p id="qcard-skills-desc">Technologies and tools I work with.</p>
               </div>
               <i class="bi bi-arrow-right arrow-icon"></i>
             </a>
@@ -186,8 +199,8 @@
             <a href="#contact" class="quick-card">
               <i class="bi bi-envelope-fill quick-icon"></i>
               <div>
-                <strong>Contact</strong>
-                <p>Let's connect and build something amazing.</p>
+                <strong id="qcard-contact-title">Contact</strong>
+                <p id="qcard-contact-desc">Let's connect and build something amazing.</p>
               </div>
               <i class="bi bi-arrow-right arrow-icon"></i>
             </a>
@@ -198,15 +211,15 @@
     <section id="about" class="section">
       <div class="container-fluid">
         <div class="section-header" data-aos="fade-up">
-          <p class="section-eyebrow">GET TO KNOW ME</p>
-          <h2 class="section-title">About <span class="gradient-text">Me</span></h2>
+          <p class="section-eyebrow" id="about-eyebrow-el">GET TO KNOW ME</p>
+          <h2 class="section-title" id="about-title-el">About <span class="gradient-text">Me</span></h2>
         </div>
         <div class="row g-4">
           <div class="col-12" data-aos="fade-up" data-aos-delay="0">
             <div class="glass-card">
               <div class="about-quote">
                 <i class="bi bi-quote quote-icon"></i>
-                <p class="quote-text">I may not have started with the path I first dreamed of, but every step I take now is a step toward becoming the person I aspire to be. Passion is discovered, goals are built, and with perseverance, I will transform challenges into opportunities.</p>
+                <p class="quote-text" id="about-quote-el">I may not have started with the path I first dreamed of, but every step I take now is a step toward becoming the person I aspire to be. Passion is discovered, goals are built, and with perseverance, I will transform challenges into opportunities.</p>
                 <span class="quote-author">— Eduardo Charles Florencio</span>
               </div>
             </div>
@@ -215,27 +228,27 @@
             <div class="glass-card h-100">
               <div class="card-icon-header">
                 <div class="card-icon-wrap"><i class="bi bi-person-lines-fill"></i></div>
-                <h5>Personal Introduction</h5>
+                <h5 id="about-personal-title-el">Personal Introduction</h5>
               </div>
-              <p>To be honest, IT was never my first passion. I originally dreamed of pursuing Law, Engineering, or Medicine — but due to personal circumstances, I found myself in this course. Still, I refuse to give up on those aspirations.</p>
-              <p>Over time, I've started to develop a genuine interest in IT, especially in fields like <strong>Data Science & Analytics</strong> and <strong>Artificial Intelligence & Machine Learning</strong> — areas that combine logic, creativity, innovation, and math-based tools that can shape the future.</p>
+              <p id="about-personal-1-el">To be honest, IT was never my first passion. I originally dreamed of pursuing Law, Engineering, or Medicine — but due to personal circumstances, I found myself in this course. Still, I refuse to give up on those aspirations.</p>
+              <p id="about-personal-2-el">Over time, I've started to develop a genuine interest in IT, especially in fields like <strong>Data Science & Analytics</strong> and <strong>Artificial Intelligence & Machine Learning</strong> — areas that combine logic, creativity, innovation, and math-based tools that can shape the future.</p>
             </div>
           </div>
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <div class="glass-card h-100">
               <div class="card-icon-header">
                 <div class="card-icon-wrap"><i class="bi bi-rocket-takeoff-fill"></i></div>
-                <h5>Career Goals</h5>
+                <h5 id="about-career-title-el">Career Goals</h5>
               </div>
-              <p>My goal is to grow into someone who can harness the power of data and intelligent systems to create meaningful impact. Whether it's uncovering insights through analytics or building smarter solutions with AI, I want to contribute to a future where <strong>technology serves humanity with purpose and grace</strong>.</p>
-              <p>I am currently seeking <strong>OJT / internship opportunities</strong> where I can apply my skills, grow professionally, and take meaningful steps toward that vision.</p>
+              <p id="about-career-1-el">My goal is to grow into someone who can harness the power of data and intelligent systems to create meaningful impact. Whether it's uncovering insights through analytics or building smarter solutions with AI, I want to contribute to a future where <strong>technology serves humanity with purpose and grace</strong>.</p>
+              <p id="about-career-2-el">I am currently seeking <strong>OJT / internship opportunities</strong> where I can apply my skills, grow professionally, and take meaningful steps toward that vision.</p>
             </div>
           </div>
           <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
             <div class="glass-card h-100">
               <div class="card-icon-header">
                 <div class="card-icon-wrap"><i class="bi bi-heart-fill"></i></div>
-                <h5>Interests</h5>
+                <h5 id="about-interests-title-el">Interests</h5>
               </div>
               <div class="interest-tags">
                 <span class="interest-tag"><i class="bi bi-bar-chart-fill"></i> Data Science</span>
@@ -254,7 +267,7 @@
             <div class="glass-card h-100">
               <div class="card-icon-header">
                 <div class="card-icon-wrap"><i class="bi bi-lightning-charge-fill"></i></div>
-                <h5>Technology Interests</h5>
+                <h5 id="about-tech-title-el">Technology Interests</h5>
               </div>
               <div class="tech-interest-list">
                 <div class="tech-interest-item"><i class="bi bi-check-circle-fill"></i> Data Science & Analytics</div>
@@ -270,31 +283,31 @@
             <div class="glass-card">
               <div class="card-icon-header">
                 <div class="card-icon-wrap"><i class="bi bi-github"></i></div>
-                <h5>GitHub Activity</h5>
+                <h5 id="github-title-el">GitHub Activity</h5>
               </div>
               <div class="row g-3 mb-3" id="github-stats-grid">
                 <div class="col-6 col-md-3">
                   <div class="glass-card text-center py-3">
                     <div class="github-stat-num" id="gh-repos">—</div>
-                    <div class="github-stat-label">Repositories</div>
+                    <div class="github-stat-label" id="gh-label-repos">Repositories</div>
                   </div>
                 </div>
                 <div class="col-6 col-md-3">
                   <div class="glass-card text-center py-3">
                     <div class="github-stat-num" id="gh-stars">—</div>
-                    <div class="github-stat-label">Stars</div>
+                    <div class="github-stat-label" id="gh-label-stars">Stars</div>
                   </div>
                 </div>
                 <div class="col-6 col-md-3">
                   <div class="glass-card text-center py-3">
                     <div class="github-stat-num" id="gh-followers">—</div>
-                    <div class="github-stat-label">Followers</div>
+                    <div class="github-stat-label" id="gh-label-followers">Followers</div>
                   </div>
                 </div>
                 <div class="col-6 col-md-3">
                   <div class="glass-card text-center py-3">
                     <div class="github-stat-num" id="gh-forks">—</div>
-                    <div class="github-stat-label">Forks</div>
+                    <div class="github-stat-label" id="gh-label-forks">Forks</div>
                   </div>
                 </div>
               </div>
@@ -303,7 +316,7 @@
               </div>
               <div class="mt-3">
                 <a href="https://github.com/eadweardly" target="_blank" class="btn-cv">
-                  <i class="bi bi-github"></i> View GitHub Profile
+                  <span id="github-btn-el"><i class="bi bi-github"></i> View GitHub Profile</span>
                 </a>
               </div>
             </div>
@@ -314,18 +327,18 @@
     <section id="education" class="section">
       <div class="container-fluid">
         <div class="section-header" data-aos="fade-up">
-          <p class="section-eyebrow">MY ACADEMIC PATH</p>
-          <h2 class="section-title">Education <span class="gradient-text">Journey</span></h2>
+          <p class="section-eyebrow" id="edu-eyebrow-el">MY ACADEMIC PATH</p>
+          <h2 class="section-title" id="edu-title-el">Education <span class="gradient-text">Journey</span></h2>
         </div>
         <div class="timeline">
           <div class="timeline-item" data-aos="fade-up" data-aos-delay="0">
             <div class="timeline-dot"></div>
             <div class="timeline-content glass-card">
-              <div class="timeline-badge current-badge">Current</div>
-              <h5 class="timeline-degree">Bachelor of Science in Information Technology</h5>
+              <div class="timeline-badge current-badge edu-current-badge">Current</div>
+              <h5 class="timeline-degree" id="edu-1-degree-el">Bachelor of Science in Information Technology</h5>
               <p class="timeline-school"><i class="bi bi-building-fill"></i> Polytechnic University of the Philippines Sto.Tomas Branch</p>
               <p class="timeline-period"><i class="bi bi-calendar3"></i> 2024 – Present</p>
-              <p class="timeline-desc">Pursuing a comprehensive program covering software development, database systems, networking, systems analysis, and modern web technologies. Actively involved in school organizations and tech communities.</p>
+              <p class="timeline-desc" id="edu-1-desc-el">Pursuing a comprehensive program covering software development, database systems, networking, systems analysis, and modern web technologies. Actively involved in school organizations and tech communities.</p>
               <div class="timeline-tags">
                 <span>Web Dev</span><span>Database</span><span>Networking</span><span>OOP</span>
               </div>
@@ -334,10 +347,10 @@
           <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
             <div class="timeline-dot"></div>
             <div class="timeline-content glass-card">
-              <h5 class="timeline-degree">Senior High School – STEM Track</h5>
+              <h5 class="timeline-degree" id="edu-2-degree-el">Senior High School – STEM Track</h5>
               <p class="timeline-school"><i class="bi bi-building-fill"></i>St. Thomas Academy</p>
               <p class="timeline-period"><i class="bi bi-calendar3"></i> 2022 – 2024</p>
-              <p class="timeline-desc">Completed the STEM (Science, Technology, Engineering, and Mathematics) strand, building a strong foundation in scientific reasoning, mathematics, and analytical thinking that supports future studies in data science and AI.</p>
+              <p class="timeline-desc" id="edu-2-desc-el">Completed the STEM (Science, Technology, Engineering, and Mathematics) strand, building a strong foundation in scientific reasoning, mathematics, and analytical thinking that supports future studies in data science and AI.</p>
               <div class="timeline-tags">
                 <span>STEM</span><span>Mathematics</span><span>Science</span><span>Analytics</span>
               </div>
@@ -346,10 +359,10 @@
           <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
             <div class="timeline-dot"></div>
             <div class="timeline-content glass-card">
-              <h5 class="timeline-degree">Junior High School</h5>
+              <h5 class="timeline-degree" id="edu-3-degree-el">Junior High School</h5>
               <p class="timeline-school"><i class="bi bi-building-fill"></i>St. Thomas Academy</p>
               <p class="timeline-period"><i class="bi bi-calendar3"></i> 2018 – 2022</p>
-              <p class="timeline-desc">Completed junior high school with a growing interest in computers and technology, building a strong academic foundation across core subjects.</p>
+              <p class="timeline-desc" id="edu-3-desc-el">Completed junior high school with a growing interest in computers and technology, building a strong academic foundation across core subjects.</p>
               <div class="timeline-tags">
                 <span>Core Subjects</span><span>Technology</span>
               </div>
@@ -358,10 +371,10 @@
           <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
             <div class="timeline-dot"></div>
             <div class="timeline-content glass-card">
-              <h5 class="timeline-degree">Elementary Education</h5>
+              <h5 class="timeline-degree" id="edu-4-degree-el">Elementary Education</h5>
               <p class="timeline-school"><i class="bi bi-building-fill"></i> Mother Barbara Micarelli School</p>
               <p class="timeline-period"><i class="bi bi-calendar3"></i> 2012 – 2018</p>
-              <p class="timeline-desc">Completed elementary education with a solid foundation in core subjects. Developed early curiosity in learning and problem-solving that shaped future academic interests.</p>
+              <p class="timeline-desc" id="edu-4-desc-el">Completed elementary education with a solid foundation in core subjects. Developed early curiosity in learning and problem-solving that shaped future academic interests.</p>
               <div class="timeline-tags">
                 <span>Core Subjects</span><span>Early Education</span>
               </div>
@@ -373,12 +386,12 @@
     <section id="skills" class="section">
       <div class="container-fluid">
         <div class="section-header" data-aos="fade-up">
-          <p class="section-eyebrow">WHAT I KNOW</p>
-          <h2 class="section-title">My <span class="gradient-text">Skills</span></h2>
+          <p class="section-eyebrow" id="skills-eyebrow-el">WHAT I KNOW</p>
+          <h2 class="section-title" id="skills-title-el">My <span class="gradient-text">Skills</span></h2>
         </div>
         <div class="row g-4">
           <div class="col-12" data-aos="fade-up">
-            <h6 class="skill-category-label"><i class="bi bi-layout-text-window-reverse"></i> Frontend Development</h6>
+            <h6 class="skill-category-label"><i class="bi bi-layout-text-window-reverse"></i> <span id="skills-cat-frontend-el">Frontend Development</span></h6>
           </div>
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
             <div class="skill-card glass-card">
@@ -466,8 +479,8 @@
     <section id="projects" class="section">
       <div class="container-fluid">
         <div class="section-header" data-aos="fade-up">
-          <p class="section-eyebrow">WHAT I'VE BUILT</p>
-          <h2 class="section-title">My <span class="gradient-text">Projects</span></h2>
+          <p class="section-eyebrow" id="projects-eyebrow-el">WHAT I'VE BUILT</p>
+          <h2 class="section-title" id="projects-title-el">My <span class="gradient-text">Projects</span></h2>
         </div>
         <div class="row g-4">
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
@@ -480,8 +493,8 @@
                 </div>
               </div>
               <div class="project-grid-body">
-                <p class="project-grid-title">Personal Portfolio</p>
-                <p class="project-grid-desc">My personal web portfolio built with HTML, CSS, and JavaScript featuring glassmorphism design and 3D effects.</p>
+                <p class="project-grid-title" id="proj-1-title-el">Personal Portfolio</p>
+                <p class="project-grid-desc" id="proj-1-desc-el">My personal web portfolio built with HTML, CSS, and JavaScript featuring glassmorphism design and 3D effects.</p>
                 <div class="tech-badges">
                   <span class="tech-badge">HTML5</span>
                   <span class="tech-badge">CSS3</span>
@@ -501,8 +514,8 @@
                 </div>
               </div>
               <div class="project-grid-body">
-                <p class="project-grid-title">Student Management System</p>
-                <p class="project-grid-desc">A web-based CRUD system for managing student records with PHP and MySQL database backend.</p>
+                <p class="project-grid-title" id="proj-2-title-el">Student Management System</p>
+                <p class="project-grid-desc" id="proj-2-desc-el">A web-based CRUD system for managing student records with PHP and MySQL database backend.</p>
                 <div class="tech-badges">
                   <span class="tech-badge">PHP</span>
                   <span class="tech-badge">MySQL</span>
@@ -517,8 +530,8 @@
                 <i class="bi bi-plus-circle-dotted" style="color:var(--accent);opacity:.35;font-size:2.5rem"></i>
               </div>
               <div class="project-grid-body">
-                <p class="project-grid-title">More Coming Soon</p>
-                <p class="project-grid-desc">Currently working on new projects involving data analytics, AI tools, and modern web apps. Stay tuned!</p>
+                <p class="project-grid-title" id="proj-3-title-el">More Coming Soon</p>
+                <p class="project-grid-desc" id="proj-3-desc-el">Currently working on new projects involving data analytics, AI tools, and modern web apps. Stay tuned!</p>
                 <div class="tech-badges">
                   <span class="tech-badge">Python</span>
                   <span class="tech-badge">Data Science</span>
@@ -534,31 +547,31 @@
     <section id="certificates" class="section">
       <div class="container-fluid">
         <div class="section-header" data-aos="fade-up">
-          <p class="section-eyebrow">ACHIEVEMENTS</p>
-          <h2 class="section-title">Certificates & <span class="gradient-text">Awards</span></h2>
+          <p class="section-eyebrow" id="certs-eyebrow-el">ACHIEVEMENTS</p>
+          <h2 class="section-title" id="certs-title-el">Certificates & <span class="gradient-text">Awards</span></h2>
         </div>
         <div class="row g-4">
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
             <div class="cert-card">
               <div class="cert-icon-wrap"><i class="bi bi-heart-fill"></i></div>
-              <p class="cert-name">Certified Yearning Expert</p>
-              <p class="cert-issuer"><i class="bi bi-award-fill"></i> Institute of Deep Feelings</p>
+              <p class="cert-name" id="cert-1-name-el">Certified Yearning Expert</p>
+              <p class="cert-issuer"><i class="bi bi-award-fill"></i> <span id="cert-1-issuer-el">Institute of Deep Feelings</span></p>
               <p class="cert-year"><i class="bi bi-calendar3"></i> 2024</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="80">
             <div class="cert-card">
               <div class="cert-icon-wrap"><i class="bi bi-shield-fill-check"></i></div>
-              <p class="cert-name">Advanced Loyalty Practitioner</p>
-              <p class="cert-issuer"><i class="bi bi-award-fill"></i> School of Undying Devotion</p>
+              <p class="cert-name" id="cert-2-name-el">Advanced Loyalty Practitioner</p>
+              <p class="cert-issuer"><i class="bi bi-award-fill"></i> <span id="cert-2-issuer-el">School of Undying Devotion</span></p>
               <p class="cert-year"><i class="bi bi-calendar3"></i> 2024</p>
             </div>
           </div>
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="160">
             <div class="cert-card">
               <div class="cert-icon-wrap"><i class="bi bi-star-fill"></i></div>
-              <p class="cert-name">Master of Faithfulness</p>
-              <p class="cert-issuer"><i class="bi bi-award-fill"></i> Academy of Eternal Trust</p>
+              <p class="cert-name" id="cert-3-name-el">Master of Faithfulness</p>
+              <p class="cert-issuer"><i class="bi bi-award-fill"></i> <span id="cert-3-issuer-el">Academy of Eternal Trust</span></p>
               <p class="cert-year"><i class="bi bi-calendar3"></i> 2025</p>
             </div>
           </div>
@@ -569,39 +582,39 @@
 
       <div class="container-fluid">
         <div class="section-header" data-aos="fade-up">
-          <p class="section-eyebrow">GET IN TOUCH</p>
-          <h2 class="section-title">Contact <span class="gradient-text">Me</span></h2>
+          <p class="section-eyebrow" id="contact-eyebrow-el">GET IN TOUCH</p>
+          <h2 class="section-title" id="contact-title-el">Contact <span class="gradient-text">Me</span></h2>
         </div>
         <div class="row g-4">
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="0">
             <div class="glass-card h-100">
-              <h5 class="mb-4">Let's Connect</h5>
-              <p class="text-muted-custom">I'm open to internship opportunities, freelance projects, collaborations, or just a friendly chat. Feel free to reach out!</p>
+              <h5 class="mb-4" id="contact-connect-el">Let's Connect</h5>
+              <p class="text-muted-custom" id="contact-desc-el">I'm open to internship opportunities, freelance projects, collaborations, or just a friendly chat. Feel free to reach out!</p>
               <div class="contact-info-list mt-4">
                 <div class="contact-info-item">
                   <div class="contact-info-icon"><i class="fas fa-envelope"></i></div>
                   <div>
-                    <small>Email</small>
+                    <small id="contact-email-label-el">Email</small>
                     <p>your.email@example.com</p>
                   </div>
                 </div>
                 <div class="contact-info-item">
                   <div class="contact-info-icon"><i class="fas fa-map-marker-alt"></i></div>
                   <div>
-                    <small>Location</small>
+                    <small id="contact-loc-label-el">Location</small>
                     <p>Philippines</p>
                   </div>
                 </div>
                 <div class="contact-info-item">
                   <div class="contact-info-icon"><i class="fas fa-graduation-cap"></i></div>
                   <div>
-                    <small>Status</small>
-                    <p>Open for OJT / Internship</p>
+                    <small id="contact-status-label-el">Status</small>
+                    <p id="contact-status-val-el">Open for OJT / Internship</p>
                   </div>
                 </div>
               </div>
               <div class="contact-social-links mt-4">
-                <p class="social-label">Social Links</p>
+                <p class="social-label" id="contact-social-el">Social Links</p>
                 <div class="social-icons">
                   <a href="https://github.com/eadweardly" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
                   <a href="https://www.facebook.com/share/1CuwSgeRq3/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
@@ -613,24 +626,24 @@
           </div>
           <div class="col-lg-8" data-aos="fade-up" data-aos-delay="100">
             <div class="glass-card">
-              <h5 class="mb-4">Send a Message</h5>
+              <h5 class="mb-4" id="contact-send-title-el">Send a Message</h5>
               <div id="contact-form">
                 <div class="row g-3">
                   <div class="col-md-6">
                     <div class="form-group-custom">
-                      <label class="form-label-custom">Your Name</label>
+                      <label class="form-label-custom" id="form-name-label-el">Your Name</label>
                       <input type="text" id="contact-name" class="form-input-custom" placeholder="Eduardo Florencio" />
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group-custom">
-                      <label class="form-label-custom">Email Address</label>
+                      <label class="form-label-custom" id="form-email-label-el">Email Address</label>
                       <input type="email" id="contact-email" class="form-input-custom" placeholder="you@example.com" />
                     </div>
                   </div>
                   <div class="col-12">
                     <div class="form-group-custom">
-                      <label class="form-label-custom">Message</label>
+                      <label class="form-label-custom" id="form-msg-label-el">Message</label>
                       <textarea id="contact-message" class="form-input-custom" rows="6" placeholder="Hi Eduardo, I'd love to connect with you..."></textarea>
                     </div>
                   </div>
@@ -651,7 +664,7 @@
       </div>
     </section>
     <footer class="site-footer">
-      <p>© 2026 <strong>Eduardo Charles Florencio Guevarra</strong> · Built with <i class="bi bi-heart-fill text-accent"></i> Love</p>
+      <p id="footer-text-el">© 2026 <strong>Eduardo Charles Florencio Guevarra</strong> · Built with <i class="bi bi-heart-fill text-accent"></i> Love</p>
     </footer>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
