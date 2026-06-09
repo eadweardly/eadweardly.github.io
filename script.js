@@ -482,6 +482,12 @@ function setLang(lang) {
   s('form-msg-label-el', t['form-msg-label']); s('btn-text', t['form-send-btn']);
   s('footer-text-el', t['footer-text']);
   document.querySelectorAll('.sidebar-connect-el').forEach(el => el.innerHTML = t['sidebar-connect']);
+  const isDarkNow = document.documentElement.getAttribute('data-theme') === 'dark';
+  const themeText = isDarkNow ? t['theme-dark'] : t['theme-light'];
+  const dl = document.getElementById('desktopThemeLabel');
+  const ml = document.getElementById('mobileThemeLabel');
+  if (dl) dl.textContent = themeText;
+  if (ml) ml.textContent = themeText;
   document.querySelectorAll('.nav-link-about').forEach(el => el.childNodes[1].textContent = ' ' + t['nav-about']);
   document.querySelectorAll('.nav-link-edu').forEach(el => el.childNodes[1].textContent = ' ' + t['nav-education']);
   document.querySelectorAll('.nav-link-skills').forEach(el => el.childNodes[1].textContent = ' ' + t['nav-skills']);
