@@ -453,6 +453,16 @@ function setLang(lang) {
   s('about-interests-title-el', t['about-interests-title']); s('about-tech-title-el', t['about-tech-title']);
   s('github-title-el', t['github-title']); s('github-btn-el', t['github-btn']);
   s('techstack-title-el', t['techstack-title']);
+  s('radar-title-el', t['radar-title']);
+  s('timeline-eyebrow-el', t['timeline-eyebrow']);
+  s('timeline-title-el', t['timeline-title']);
+  s('tl-1-title-el', t['tl-1-title']); s('tl-1-desc-el', t['tl-1-desc']);
+  s('tl-2-title-el', t['tl-2-title']); s('tl-2-desc-el', t['tl-2-desc']);
+  s('tl-3-title-el', t['tl-3-title']); s('tl-3-desc-el', t['tl-3-desc']);
+  s('tl-4-title-el', t['tl-4-title']); s('tl-4-desc-el', t['tl-4-desc']);
+  s('tl-5-title-el', t['tl-5-title']); s('tl-5-desc-el', t['tl-5-desc']);
+  s('tl-6-title-el', t['tl-6-title']); s('tl-6-desc-el', t['tl-6-desc']);
+  document.querySelectorAll('.nav-link-timeline').forEach(el => el.childNodes[1].textContent = ' ' + t['nav-timeline']);
   s('gh-label-repos', t['gh-label-repos']); s('gh-label-stars', t['gh-label-stars']);
   s('gh-label-followers', t['gh-label-followers']); s('gh-label-forks', t['gh-label-forks']);
   s('edu-eyebrow-el', t['edu-eyebrow']); s('edu-title-el', t['edu-title']);
@@ -494,4 +504,71 @@ function setLang(lang) {
 (function initLang() {
   const saved = localStorage.getItem('lang') || 'en';
   setLang(saved);
+})();
+(function manilaClockTick() {
+  const el = document.getElementById('manilaTime');
+  if (!el) return;
+  function update() {
+    const now = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+    el.textContent = now;
+  }
+  update();
+  setInterval(update, 1000);
+})();
+(function initRadarChart() {
+  const canvas = document.getElementById('radarChart');
+  if (!canvas || typeof Chart === 'undefined') return;
+  const isDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
+  const getColors = () => ({
+    text: isDark() ? '#94a3b8' : '#6b7280',
+    grid: isDark() ? 'rgba(129,140,248,0.15)' : 'rgba(106,90,205,0.1)',
+    fill: isDark() ? 'rgba(129,140,248,0.2)' : 'rgba(106,90,205,0.15)',
+    border: isDark() ? '#818cf8' : '#6a5acd',
+  });
+  const labels = ['HTML/CSS', 'JavaScript', 'PHP', 'MySQL', 'Python', 'Git', 'UI/UX', 'Problem Solving'];
+  const data = [85, 70, 65, 65, 55, 70, 72, 78];
+  const c = getColors();
+  const chart = new Chart(canvas, {
+    type: 'radar',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Skill Level',
+        data,
+        backgroundColor: c.fill,
+        borderColor: c.border,
+        borderWidth: 2,
+        pointBackgroundColor: c.border,
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: c.border,
+        pointRadius: 4,
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        r: {
+          min: 0, max: 100,
+          ticks: { stepSize: 25, display: false },
+          grid: { color: c.grid },
+          angleLines: { color: c.grid },
+          pointLabels: { color: c.text, font: { size: 11, family: "'Plus Jakarta Sans', sans-serif", weight: '600' } }
+        }
+      }
+    }
+  });
+  const observer = new MutationObserver(() => {
+    const nc = getColors();
+    chart.data.datasets[0].backgroundColor = nc.fill;
+    chart.data.datasets[0].borderColor = nc.border;
+    chart.data.datasets[0].pointBackgroundColor = nc.border;
+    chart.options.scales.r.grid.color = nc.grid;
+    chart.options.scales.r.angleLines.color = nc.grid;
+    chart.options.scales.r.pointLabels.color = nc.text;
+    chart.update();
+  });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 })();

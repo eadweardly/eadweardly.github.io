@@ -1357,3 +1357,110 @@ body::after {
 [data-theme="dark"] .github-logo-icon {
   filter: invert(1);
 }
+.manila-clock-wrap {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .75rem 1rem;
+  border-top: 1px solid var(--card-border);
+}
+.manila-clock-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.manila-time {
+  font-family: 'Syne', sans-serif;
+  font-size: .85rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: .04em;
+}
+.manila-label {
+  font-size: .65rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.career-timeline-wrap {
+  overflow-x: auto;
+  padding-bottom: 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) transparent;
+}
+.career-timeline-track {
+  display: flex;
+  gap: 0;
+  position: relative;
+  min-width: max-content;
+  padding: 2rem 1rem 1rem;
+}
+.career-timeline-track::before {
+  content: '';
+  position: absolute;
+  top: 2.85rem;
+  left: 1rem;
+  right: 1rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--grad-start), var(--grad-end));
+  opacity: .35;
+}
+.career-tl-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 180px;
+  flex-shrink: 0;
+  position: relative;
+}
+.career-tl-dot {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 3px solid var(--accent);
+  z-index: 1;
+  margin-bottom: 1rem;
+  transition: all .3s;
+  box-shadow: 0 0 0 4px rgba(106,90,205,0.12);
+}
+.career-tl-item.active .career-tl-dot {
+  background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+  border-color: transparent;
+  box-shadow: 0 0 0 5px rgba(106,90,205,0.2), 0 0 16px rgba(106,90,205,0.4);
+}
+.career-tl-item.future .career-tl-dot {
+  border-color: var(--text-muted);
+  opacity: .5;
+}
+.career-tl-card {
+  width: 160px;
+  padding: 1rem;
+  margin: 0 auto;
+  text-align: center;
+}
+.career-tl-item.future .career-tl-card {
+  opacity: .55;
+}
+.career-tl-year {
+  font-size: .68rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: .4rem;
+}
+.career-tl-title {
+  font-family: 'Syne', sans-serif;
+  font-size: .82rem;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: .35rem;
+}
+.career-tl-desc {
+  font-size: .72rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
