@@ -352,6 +352,7 @@ const translations = {
     'skills-eyebrow': 'WHAT I KNOW', 'skills-title': 'My <span class="gradient-text">Skills</span>',
     'skills-cat-frontend': 'Frontend Development', 'skills-cat-backend': 'Backend / Database',
     'skills-cat-tools': 'Tools & Platforms',
+    'techstack-title': 'Tech Stack',
     'projects-eyebrow': "WHAT I'VE BUILT", 'projects-title': 'My <span class="gradient-text">Projects</span>',
     'proj-1-title': 'Personal Portfolio', 'proj-1-desc': 'My personal web portfolio built with HTML, CSS, and JavaScript featuring glassmorphism design and 3D effects.',
     'proj-2-title': 'Student Management System', 'proj-2-desc': 'A web-based CRUD system for managing student records with PHP and MySQL database backend.',
@@ -406,6 +407,7 @@ const translations = {
     'skills-eyebrow': 'ANG AKING MGA KAALAMAN', 'skills-title': 'Aking mga <span class="gradient-text">Kakayahan</span>',
     'skills-cat-frontend': 'Frontend Development', 'skills-cat-backend': 'Backend / Database',
     'skills-cat-tools': 'Mga Kagamitan at Platform',
+    'techstack-title': 'Tech Stack',
     'projects-eyebrow': 'MGA GINAWA KO', 'projects-title': 'Aking mga <span class="gradient-text">Proyekto</span>',
     'proj-1-title': 'Personal na Portfolio', 'proj-1-desc': 'Ang aking personal na web portfolio na ginawa gamit ang HTML, CSS, at JavaScript na may glassmorphism design at 3D effects.',
     'proj-2-title': 'Student Management System', 'proj-2-desc': 'Isang web-based CRUD system para sa pamamahala ng mga rekord ng mag-aaral gamit ang PHP at MySQL database backend.',
@@ -450,6 +452,7 @@ function setLang(lang) {
   s('about-career-1-el', t['about-career-1']); s('about-career-2-el', t['about-career-2']);
   s('about-interests-title-el', t['about-interests-title']); s('about-tech-title-el', t['about-tech-title']);
   s('github-title-el', t['github-title']); s('github-btn-el', t['github-btn']);
+  s('techstack-title-el', t['techstack-title']);
   s('gh-label-repos', t['gh-label-repos']); s('gh-label-stars', t['gh-label-stars']);
   s('gh-label-followers', t['gh-label-followers']); s('gh-label-forks', t['gh-label-forks']);
   s('edu-eyebrow-el', t['edu-eyebrow']); s('edu-title-el', t['edu-title']);
