@@ -88,7 +88,7 @@ body::after {
   background: var(--sidebar-bg);
   border-right: 1px solid rgba(255,255,255,0.25);
   z-index: 1000;
-  overflow-y: auto;
+  overflow-y: hidden;
   transition: background .4s, border-color .4s;
   backdrop-filter: var(--blur-heavy);
   -webkit-backdrop-filter: var(--blur-heavy);
@@ -102,9 +102,10 @@ body::after {
   display: flex;
   flex-direction: column;
   height: 100%;
-  padding: 1.5rem 0 1rem;
+  padding: .75rem 0 .5rem;
   position: relative;
   z-index: 1;
+  justify-content: space-between;
 }
 .main-content {
   margin-left: 220px;
@@ -167,10 +168,10 @@ body::after {
 }
 .btn-close-custom:hover { color: var(--accent); }
 
-.sidebar-profile { padding: 0 1rem 1rem; }
+.sidebar-profile { padding: 0 1rem .5rem; }
 .profile-img-wrap {
-  width: 90px; height: 90px;
-  margin: 0 auto 0.75rem;
+  width: 68px; height: 68px;
+  margin: 0 auto 0.5rem;
   border-radius: 50%;
   border: 2px solid transparent;
   background: linear-gradient(var(--sidebar-bg), var(--sidebar-bg)) padding-box,
@@ -198,11 +199,11 @@ body::after {
 }
 .profile-name {
   font-family: 'Poppins', sans-serif;
-  font-size: .85rem;
+  font-size: .78rem;
   font-weight: 700;
   color: var(--text);
   line-height: 1.3;
-  margin-bottom: .3rem;
+  margin-bottom: .2rem;
   transition: color .35s;
 }
 .profile-title {
@@ -224,7 +225,7 @@ body::after {
   display: flex;
   align-items: center;
   gap: .6rem;
-  padding: .55rem .8rem;
+  padding: .38rem .8rem;
   border-radius: 10px;
   color: var(--text-muted);
   font-size: .8rem;
@@ -247,7 +248,7 @@ body::after {
 }
 
 .sidebar-social {
-  padding: .75rem 1rem;
+  padding: .5rem 1rem;
   border-top: 1px solid var(--card-border);
   border-bottom: 1px solid var(--card-border);
 }
@@ -281,7 +282,7 @@ body::after {
   display: flex;
   align-items: center;
   gap: .5rem;
-  padding: .9rem 1rem;
+  padding: .55rem 1rem;
 }
 .theme-icon { font-size: .9rem; color: var(--text-muted); }
 .theme-label { font-size: .75rem; font-weight: 500; color: var(--text-muted); flex: 1; }
@@ -1290,7 +1291,7 @@ body::after {
   display: flex;
   align-items: center;
   gap: .4rem;
-  padding: .6rem .75rem;
+  padding: .4rem .75rem;
   border-top: 1px solid var(--card-border);
 }
 .lang-btn {
@@ -1371,7 +1372,7 @@ body::after {
   display: flex;
   align-items: center;
   gap: .5rem;
-  padding: .75rem 1rem;
+  padding: .4rem 1rem;
   border-top: 1px solid var(--card-border);
 }
 .manila-clock-info {
