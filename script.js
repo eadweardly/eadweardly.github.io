@@ -494,6 +494,8 @@ function setLang(lang) {
   document.querySelectorAll('.nav-link-contact').forEach(el => el.childNodes[1].textContent = ' ' + t['nav-contact']);
   document.getElementById('btnEN')?.classList.toggle('active', lang === 'en');
   document.getElementById('btnFIL')?.classList.toggle('active', lang === 'fil');
+  document.getElementById('btnEN_mob')?.classList.toggle('active', lang === 'en');
+  document.getElementById('btnFIL_mob')?.classList.toggle('active', lang === 'fil');
   localStorage.setItem('lang', lang);
 }
 (function initLang() {
@@ -502,10 +504,12 @@ function setLang(lang) {
 })();
 (function manilaClockTick() {
   const el = document.getElementById('manilaTime');
-  if (!el) return;
+  const elMob = document.getElementById('manilaTimeMob');
+  if (!el && !elMob) return;
   function update() {
     const now = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-    el.textContent = now;
+    if (el) el.textContent = now;
+    if (elMob) elMob.textContent = now;
   }
   update();
   setInterval(update, 1000);
