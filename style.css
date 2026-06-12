@@ -1294,9 +1294,9 @@ body::after {
   border-top: 1px solid var(--card-border);
 }
 .lang-btn {
-  font-size: .72rem;
+  font-size: .75rem;
   font-weight: 700;
-  padding: .25rem .65rem;
+  padding: .4rem .9rem;
   border-radius: 20px;
   border: 1.5px solid var(--card-border);
   background: transparent;
@@ -1304,12 +1304,22 @@ body::after {
   cursor: pointer;
   transition: all .2s;
   font-family: 'Inter', sans-serif;
+  min-width: 44px;
+  min-height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .lang-btn.active {
   background: linear-gradient(135deg, #6a5acd, #818cf8);
   color: #fff;
   border-color: transparent;
-  box-shadow: 0 2px 10px rgba(106,90,205,0.3);
+  box-shadow: 0 2px 14px rgba(106,90,205,0.45);
+  transform: scale(1.08);
+}
+.lang-btn:not(.active):hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 .lang-divider {
   font-size: .7rem;
