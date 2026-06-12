@@ -507,9 +507,16 @@ function setLang(lang) {
   const elMob = document.getElementById('manilaTimeMob');
   if (!el && !elMob) return;
   function update() {
-    const now = new Date().toLocaleTimeString('en-US', { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-    if (el) el.textContent = now;
-    if (elMob) elMob.textContent = now;
+    const now = new Date();
+    const manila = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Manila' }));
+    let h = manila.getHours();
+    const m = String(manila.getMinutes()).padStart(2, '0');
+    const s = String(manila.getSeconds()).padStart(2, '0');
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    const time = `${String(h).padStart(2,'0')}:${m}:${s} ${ampm}`;
+    if (el) el.textContent = time;
+    if (elMob) elMob.textContent = time;
   }
   update();
   setInterval(update, 1000);
