@@ -207,7 +207,7 @@ body::after {
   transition: color .35s;
 }
 .profile-title {
-  font-size: .72rem;
+  font-size: .7rem;
   font-weight: 600;
   color: var(--accent);
   letter-spacing: .04em;
@@ -216,7 +216,7 @@ body::after {
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 1px;
   padding: 0 .75rem;
   margin-bottom: auto;
   flex: 1;
@@ -258,11 +258,11 @@ body::after {
   color: var(--text-muted);
   letter-spacing: .08em;
   text-transform: uppercase;
-  margin-bottom: .6rem;
+  margin-bottom: .3rem;
 }
 .social-icons { display: flex; gap: .5rem; }
 .social-icons a {
-  width: 34px; height: 34px;
+  width: 30px; height: 30px;
   display: flex; align-items: center; justify-content: center;
   border-radius: 8px;
   background: var(--nav-hover-bg);
@@ -1382,7 +1382,7 @@ body::after {
 }
 .manila-time {
   font-family: 'Poppins', sans-serif;
-  font-size: .85rem;
+  font-size: .78rem;
   font-weight: 700;
   color: var(--accent);
   letter-spacing: .04em;
