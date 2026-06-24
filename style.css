@@ -1475,3 +1475,81 @@ body::after {
   line-height: 1.5;
   margin: 0;
 }
+.github-contrib-label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  margin-bottom: .75rem;
+}
+.github-contrib-img-wrap {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--nav-hover-bg);
+  padding: .75rem;
+  border: 1px solid var(--card-border);
+}
+.github-contrib-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  filter: saturate(1.2);
+}
+[data-theme="dark"] .github-contrib-img {
+  filter: saturate(1.5) brightness(1.15);
+}
+.github-readme-wrap {
+  font-size: .85rem;
+  line-height: 1.7;
+  color: var(--text);
+  max-height: 400px;
+  overflow-y: auto;
+  border-radius: 14px !important;
+}
+.github-readme-wrap h1,
+.github-readme-wrap h2,
+.github-readme-wrap h3 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  color: var(--text);
+  margin: .75rem 0 .4rem;
+}
+.github-readme-wrap h1 { font-size: 1.2rem; }
+.github-readme-wrap h2 { font-size: 1rem; }
+.github-readme-wrap h3 { font-size: .9rem; }
+.github-readme-wrap p { color: var(--text-muted); margin-bottom: .5rem; }
+.github-readme-wrap a { color: var(--accent); text-decoration: none; }
+.github-readme-wrap a:hover { text-decoration: underline; }
+.github-readme-wrap code {
+  background: var(--nav-hover-bg);
+  padding: .1rem .4rem;
+  border-radius: 4px;
+  font-size: .8rem;
+  color: var(--accent);
+}
+.github-readme-wrap pre {
+  background: var(--nav-hover-bg);
+  padding: .75rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin-bottom: .75rem;
+}
+.github-readme-wrap img { max-width: 100%; border-radius: 8px; }
+.github-readme-wrap ul,
+.github-readme-wrap ol {
+  padding-left: 1.25rem;
+  color: var(--text-muted);
+  margin-bottom: .5rem;
+}
+.readme-loading {
+  display: flex;
+  align-items: center;
+  color: var(--text-muted);
+  font-size: .85rem;
+  padding: .5rem 0;
+}
