@@ -356,6 +356,7 @@ const translations = {
     'projects-eyebrow': "WHAT I'VE BUILT", 'projects-title': 'My <span class="gradient-text">Projects</span>',
     'proj-1-title': 'Personal Portfolio', 'proj-1-desc': 'My personal web portfolio built with HTML, CSS, and JavaScript featuring glassmorphism design and 3D effects.',
     'proj-2-title': 'Student Management System', 'proj-2-desc': 'A web-based CRUD system for managing student records with PHP and MySQL database backend.',
+    'proj-4-title': 'Web Development Activities', 'proj-4-desc': 'A collection of my activities and exercises for my Web Development subject, starting with a Bento-style layout.',
     'proj-3-title': 'More Coming Soon', 'proj-3-desc': 'Currently working on new projects involving data analytics, AI tools, and modern web apps. Stay tuned!',
     'certs-eyebrow': 'ACHIEVEMENTS', 'certs-title': 'Certificates & <span class="gradient-text">Awards</span>',
     'cert-1-name': 'Certified Yearning Expert', 'cert-1-issuer': 'Institute of Deep Feelings',
@@ -411,6 +412,7 @@ const translations = {
     'projects-eyebrow': 'MGA GINAWA KO', 'projects-title': 'Aking mga <span class="gradient-text">Proyekto</span>',
     'proj-1-title': 'Personal na Portfolio', 'proj-1-desc': 'Ang aking personal na web portfolio na ginawa gamit ang HTML, CSS, at JavaScript na may glassmorphism design at 3D effects.',
     'proj-2-title': 'Student Management System', 'proj-2-desc': 'Isang web-based CRUD system para sa pamamahala ng mga rekord ng mag-aaral gamit ang PHP at MySQL database backend.',
+    'proj-4-title': 'Web Development Activities', 'proj-4-desc': 'Koleksyon ng aking mga aktibidad at ehersisyo para sa Web Development, simula sa Bento-style na layout.',
     'proj-3-title': 'Marami Pang Darating', 'proj-3-desc': 'Kasalukuyang nagtatrabaho sa mga bagong proyekto na may kinalaman sa data analytics, AI tools, at modernong web apps. Abangan!',
     'certs-eyebrow': 'MGA NAGAWA', 'certs-title': 'Mga Sertipiko at <span class="gradient-text">Parangal</span>',
     'cert-1-name': 'Certified Yearning Expert', 'cert-1-issuer': 'Institute of Deep Feelings',
@@ -467,6 +469,7 @@ function setLang(lang) {
   s('proj-1-title-el', t['proj-1-title']); s('proj-1-desc-el', t['proj-1-desc']);
   s('proj-2-title-el', t['proj-2-title']); s('proj-2-desc-el', t['proj-2-desc']);
   s('proj-3-title-el', t['proj-3-title']); s('proj-3-desc-el', t['proj-3-desc']);
+  s('proj-4-title-el', t['proj-4-title']); s('proj-4-desc-el', t['proj-4-desc']);
   s('certs-eyebrow-el', t['certs-eyebrow']); s('certs-title-el', t['certs-title']);
   s('cert-1-name-el', t['cert-1-name']); s('cert-1-issuer-el', t['cert-1-issuer']);
   s('cert-2-name-el', t['cert-2-name']); s('cert-2-issuer-el', t['cert-2-issuer']);
