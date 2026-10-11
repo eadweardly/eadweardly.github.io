@@ -75,7 +75,8 @@
       color: var(--accent); opacity: .95; font-size: 2.5rem;
     }
     .act-preview.live { background: #000; }
-    .act-card .act-preview:not(.live) { flex: 1; aspect-ratio: auto; min-height: 220px; }
+    /* every preview box (live or upcoming) gets the same height => all 4 cards are the same size */
+    .act-card .act-preview:not(.live) { flex: none; aspect-ratio: auto; height: var(--prev-h, 22rem); }
     .act-preview iframe {
       position: absolute; top: 0; left: 0; width: 1280px; height: 1000px;
       border: 0; background: #fff; pointer-events: none; transform-origin: top left;
@@ -96,7 +97,10 @@
     }
     .act-btn:active { transform: scale(.97); }
     .act-card.upcoming { opacity: .85; }
-    .act-status { font-size: .72rem; font-weight: 700; color: var(--text-muted); margin-bottom: 1rem; }
+    .act-status {
+      font-size: .72rem; font-weight: 700; color: var(--text-muted);
+      margin-top: auto; min-height: 2.45rem; display: flex; align-items: center; gap: .4rem; /* same height as the View Project button */
+    }
   </style>
 </head>
 <body>
@@ -164,6 +168,7 @@
           frame.style.transform = 'scale(' + k + ')';
           box.style.aspectRatio = 'auto';
           box.style.height = Math.round(pageH * k) + 'px';
+          grid.style.setProperty('--prev-h', box.style.height);   // other cards copy this height
         };
         frame.addEventListener('load', () => {
           try {
