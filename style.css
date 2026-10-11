@@ -318,7 +318,10 @@ body::after {
   transition: border-color .35s;
   position: relative;
 }
-.hero-section { padding-bottom: 2rem; }
+.hero-section {
+  min-height: unset;
+  padding-bottom: 2.5rem;
+}
 .section-header { margin-bottom: 2.5rem; }
 .section-eyebrow {
   font-size: .7rem;
