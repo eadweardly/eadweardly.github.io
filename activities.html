@@ -68,6 +68,7 @@
     }
     .act-preview {
       position: relative; width: 100%;
+      aspect-ratio: 16 / 9;
       border-radius: 14px; overflow: hidden; margin: .25rem 0 1.1rem;
       background: var(--nav-active-bg); border: 1px solid var(--card-border);
       display: flex; align-items: center; justify-content: center;
@@ -123,10 +124,11 @@
   <script>
     const REPO_PAGES = 'https://eadweardly.github.io/web-development-activities/';
     const DESKTOP_W  = 1280;
+    const ASPECT     = 9 / 16;
 
     const ACTIVITIES = [
-      { no: 1, title: 'Bento Style Page',  desc: 'Bento style layout implementation.', folder: 'Act1-Bento', previewHeight: 800 },
-      { no: 2, title: 'Empty Passenger',   desc: 'Classic car collection.',             folder: 'Act2-JSON',  previewHeight: 800 },
+      { no: 1, title: 'Bento Style Page',  desc: 'Bento style layout implementation.', folder: 'Act1-Bento' },
+      { no: 2, title: 'Empty Passenger',   desc: 'Classic car collection.',             folder: 'Act2-JSON'  },
       { no: 3, title: 'Upcoming Activity', desc: 'Details will be added soon.' },
       { no: 4, title: 'Upcoming Activity', desc: 'Details will be added soon.' },
     ];
@@ -157,18 +159,18 @@
 
       if (!live) return;
 
-      const box    = col.querySelector('.act-preview');
-      const pageH  = a.previewHeight || 900;
-      const frame  = document.createElement('iframe');
+      const box   = col.querySelector('.act-preview');
+      const frame = document.createElement('iframe');
 
       const fit = () => {
-        const boxW = box.clientWidth;
-        const k    = boxW / DESKTOP_W;
-        const scaledH = Math.round(pageH * k);
+        const boxW    = box.clientWidth;
+        const boxH    = Math.round(boxW * ASPECT);
+        const pageH   = Math.round(DESKTOP_W * ASPECT);
+        const k       = boxW / DESKTOP_W;
         frame.style.width     = DESKTOP_W + 'px';
         frame.style.height    = pageH + 'px';
         frame.style.transform = `scale(${k})`;
-        box.style.height      = scaledH + 'px';
+        box.style.height      = boxH + 'px';
       };
 
       frame.src       = live;
