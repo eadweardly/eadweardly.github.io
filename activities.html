@@ -10,7 +10,6 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link href="style.css" rel="stylesheet" />
   <style>
-    /* style.css hides the native cursor (the portfolio uses a custom one); restore it on this page */
     *, *::before, *::after { cursor: auto !important; }
     a, a *, button, button * { cursor: pointer !important; }
     .act-topbar {
@@ -68,17 +67,15 @@
       font-size: .75rem; font-weight: 700; letter-spacing: .04em;
     }
     .act-preview {
-      position: relative; width: 100%; aspect-ratio: 16 / 10;
+      position: relative; width: 100%;
       border-radius: 14px; overflow: hidden; margin: .25rem 0 1.1rem;
       background: var(--nav-active-bg); border: 1px solid var(--card-border);
       display: flex; align-items: center; justify-content: center;
-      color: var(--accent); opacity: .95; font-size: 2.5rem;
+      color: var(--accent); font-size: 2.5rem;
     }
-    .act-preview.live { background: #000; }
-    /* every preview box (live or upcoming) gets the same height => all 4 cards are the same size */
-    .act-card .act-preview:not(.live) { flex: none; aspect-ratio: auto; height: var(--prev-h, 22rem); }
+    .act-preview.live { background: #fff; }
     .act-preview iframe {
-      position: absolute; top: 0; left: 0; width: 1280px; height: 1000px;
+      position: absolute; top: 0; left: 0;
       border: 0; background: #fff; pointer-events: none; transform-origin: top left;
     }
     .act-btn {
@@ -90,7 +87,7 @@
       border: 1px solid var(--card-border); outline: none;
       transition: box-shadow .25s, border-color .25s, transform .25s;
     }
-    .act-btn:hover, .act-btn:focus-visible, .act-btn:active {
+    .act-btn:hover, .act-btn:focus-visible {
       color: var(--text); text-decoration: none;
       border-color: var(--accent);
       box-shadow: 0 0 0 1px var(--accent), 0 0 18px var(--accent), 0 0 38px rgba(129,140,248,.45);
@@ -99,7 +96,7 @@
     .act-card.upcoming { opacity: .85; }
     .act-status {
       font-size: .72rem; font-weight: 700; color: var(--text-muted);
-      margin-top: auto; min-height: 2.45rem; display: flex; align-items: center; gap: .4rem; /* same height as the View Project button */
+      margin-top: auto; min-height: 2.45rem; display: flex; align-items: center; gap: .4rem;
     }
   </style>
 </head>
@@ -124,85 +121,93 @@
   </main>
 
   <script>
-    // To add a new activity: push the folder to the repo, then add one entry here.
-    // `folder` is the exact folder name inside the web-development-activities repo.
-    // Leave `folder` empty for an upcoming activity.
     const REPO_PAGES = 'https://eadweardly.github.io/web-development-activities/';
+    const DESKTOP_W  = 1280;
+
     const ACTIVITIES = [
-      { no: 1, title: 'Bento Style Page', desc: 'Bento style layout implementation.', folder: 'Act1-Bento' },
-      { no: 2, title: 'Empty Passenger', desc: 'Classic car collection', folder: 'Act2-JSON' },
+      { no: 1, title: 'Bento Style Page',  desc: 'Bento style layout implementation.', folder: 'Act1-Bento', previewHeight: 800 },
+      { no: 2, title: 'Empty Passenger',   desc: 'Classic car collection.',             folder: 'Act2-JSON',  previewHeight: 800 },
       { no: 3, title: 'Upcoming Activity', desc: 'Details will be added soon.' },
-      { no: 4, title: 'Upcoming Activity', desc: 'Details will be added soon.' }
+      { no: 4, title: 'Upcoming Activity', desc: 'Details will be added soon.' },
     ];
 
     const grid = document.getElementById('activityGrid');
+
     ACTIVITIES.forEach(a => {
-      const col = document.createElement('div');
+      const col  = document.createElement('div');
       col.className = 'col-md-6';
-      const live = a.folder ? REPO_PAGES + encodeURIComponent(a.folder).replace(/%2F/g, '/') + '/' : '';
+      const live = a.folder
+        ? REPO_PAGES + encodeURIComponent(a.folder).replace(/%2F/g, '/') + '/'
+        : '';
+
       col.innerHTML = `
         <div class="glass-card act-card ${live ? '' : 'upcoming'}">
           <span class="act-pill">Activity ${a.no}</span>
           <h3 class="project-grid-title" style="font-size:1.25rem"></h3>
           <p class="project-grid-desc"></p>
-          <div class="act-preview">${live ? '' : '<i class="bi bi-cone-striped"></i>'}</div>
+          <div class="act-preview ${live ? 'live' : ''}">${live ? '' : '<i class="bi bi-cone-striped"></i>'}</div>
           ${live
             ? `<a class="act-btn" href="${live}" target="_blank" rel="noopener"><i class="bi bi-box-arrow-up-right"></i> View Project</a>`
             : `<span class="act-status"><i class="bi bi-hourglass-split"></i> Coming soon</span>`}
         </div>`;
+
       col.querySelector('.project-grid-title').textContent = a.title;
-      col.querySelector('.project-grid-desc').textContent = a.desc;
+      col.querySelector('.project-grid-desc').textContent  = a.desc;
       grid.appendChild(col);
 
-      if (live) {
-        // Show the WHOLE bento page: render it at desktop width (1280px => 3-column bento),
-        // measure its real height, then scale it down so it fits the card exactly.
-        const VIEW_W = 1280;
-        const box = col.querySelector('.act-preview');
-        box.classList.add('live');
-        const frame = document.createElement('iframe');
-        let pageH = a.previewHeight || 1000;   // fallback if the page can't be measured
-        const fit = () => {
-          const k = box.clientWidth / VIEW_W;
-          frame.style.height = pageH + 'px';
-          frame.style.transform = 'scale(' + k + ')';
-          box.style.aspectRatio = 'auto';
-          box.style.height = Math.round(pageH * k) + 'px';
-          grid.style.setProperty('--prev-h', box.style.height);   // other cards copy this height
-        };
-        frame.addEventListener('load', () => {
-          try {
-            frame.style.height = '100px';  // shrink first so scrollHeight = real content height
-            const d = frame.contentDocument;
-            pageH = Math.max(d.documentElement.scrollHeight, d.body.scrollHeight);
-          } catch (e) { /* cross-origin (e.g. local preview): keep fallback height */ }
-          fit();
-        });
-        frame.src = live;
-        frame.loading = 'lazy';
-        frame.tabIndex = -1;
-        frame.scrolling = 'no';
-        frame.title = a.title + ' preview';
-        box.appendChild(frame);
+      if (!live) return;
+
+      const box    = col.querySelector('.act-preview');
+      const pageH  = a.previewHeight || 900;
+      const frame  = document.createElement('iframe');
+
+      const fit = () => {
+        const boxW = box.clientWidth;
+        const k    = boxW / DESKTOP_W;
+        const scaledH = Math.round(pageH * k);
+        frame.style.width     = DESKTOP_W + 'px';
+        frame.style.height    = pageH + 'px';
+        frame.style.transform = `scale(${k})`;
+        box.style.height      = scaledH + 'px';
+      };
+
+      frame.src       = live;
+      frame.loading   = 'lazy';
+      frame.tabIndex  = -1;
+      frame.scrolling = 'no';
+      frame.title     = a.title + ' preview';
+      frame.setAttribute('sandbox', 'allow-same-origin allow-scripts');
+      frame.style.cssText = 'position:absolute;top:0;left:0;border:0;background:#fff;pointer-events:none;transform-origin:top left;';
+
+      frame.addEventListener('load', () => {
+        try {
+          const d = frame.contentDocument;
+          if (d && d.documentElement)
+            d.documentElement.setAttribute('data-theme', 'light');
+        } catch(e) {}
         fit();
-        new ResizeObserver(fit).observe(box.parentElement);
-      }
+      });
+
+      box.appendChild(frame);
+      fit();
+      new ResizeObserver(fit).observe(box);
     });
 
-    // Theme: shares the same 'theme' key as the main portfolio
     const root = document.documentElement;
-    const btn = document.getElementById('actTheme');
+    const btn  = document.getElementById('actTheme');
     function applyTheme(t) {
       root.setAttribute('data-theme', t);
-      btn.innerHTML = t === 'dark' ? '<i class="bi bi-sun-fill"></i>' : '<i class="bi bi-moon-stars-fill"></i>';
+      btn.innerHTML = t === 'dark'
+        ? '<i class="bi bi-sun-fill"></i>'
+        : '<i class="bi bi-moon-stars-fill"></i>';
     }
     let saved = null;
-    try { saved = localStorage.getItem('theme'); } catch (e) {}
+    try { saved = localStorage.getItem('theme'); } catch(e) {}
     applyTheme(saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));
     btn.addEventListener('click', () => {
       const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       applyTheme(next);
-      try { localStorage.setItem('theme', next); } catch (e) {}
+      try { localStorage.setItem('theme', next); } catch(e) {}
     });
   </script>
 </body>
