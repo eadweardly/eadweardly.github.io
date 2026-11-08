@@ -392,8 +392,6 @@ const translations = {
     'skills-cat-tools': 'Tools & Platforms',
     'techstack-title': 'Tech Stack',
     'projects-eyebrow': "WHAT I'VE BUILT", 'projects-title': 'My <span class="gradient-text">Projects</span>',
-    'proj-1-title': 'Personal Portfolio', 'proj-1-desc': 'My personal web portfolio built with HTML, CSS, and JavaScript featuring glassmorphism design and 3D effects.',
-    'proj-2-title': 'Student Management System', 'proj-2-desc': 'A web-based CRUD system for managing student records with PHP and MySQL database backend.',
     'proj-4-title': 'Web Development Activities', 'proj-4-desc': 'A collection of my activities and exercises for my Web Development subject, starting with a Bento-style layout.',
     'proj-5-title': 'EdVantage Calyx Tech', 'proj-5-desc': 'A neon-themed digital store front for tech gadgets and accessories, built with HTML, CSS, and JavaScript.',
     'proj-6-title': 'NexTech', 'proj-6-desc': 'A PHP and MySQL e-commerce site for technology products with cart, checkout, payment, and feedback pages. Group project for Information Management.',
@@ -451,8 +449,6 @@ const translations = {
     'skills-cat-tools': 'Mga Kagamitan at Platform',
     'techstack-title': 'Tech Stack',
     'projects-eyebrow': 'MGA GINAWA KO', 'projects-title': 'Aking mga <span class="gradient-text">Proyekto</span>',
-    'proj-1-title': 'Personal na Portfolio', 'proj-1-desc': 'Ang aking personal na web portfolio na ginawa gamit ang HTML, CSS, at JavaScript na may glassmorphism design at 3D effects.',
-    'proj-2-title': 'Student Management System', 'proj-2-desc': 'Isang web-based CRUD system para sa pamamahala ng mga rekord ng mag-aaral gamit ang PHP at MySQL database backend.',
     'proj-4-title': 'Web Development Activities', 'proj-4-desc': 'Koleksyon ng aking mga aktibidad at ehersisyo para sa Web Development, simula sa Bento-style na layout.',
     'proj-5-title': 'EdVantage Calyx Tech', 'proj-5-desc': 'Isang neon-themed na digital store para sa mga tech gadget at accessories, gawa sa HTML, CSS, at JavaScript.',
     'proj-6-title': 'NexTech', 'proj-6-desc': 'Isang PHP at MySQL na e-commerce site para sa mga produktong teknolohiya na may cart, checkout, payment, at feedback pages. Group project para sa Information Management.',
@@ -510,8 +506,6 @@ function setLang(lang) {
   s('skills-cat-frontend-el', t['skills-cat-frontend']); s('skills-cat-backend-el', t['skills-cat-backend']);
   s('skills-cat-tools-el', t['skills-cat-tools']);
   s('projects-eyebrow-el', t['projects-eyebrow']); s('projects-title-el', t['projects-title']);
-  s('proj-1-title-el', t['proj-1-title']); s('proj-1-desc-el', t['proj-1-desc']);
-  s('proj-2-title-el', t['proj-2-title']); s('proj-2-desc-el', t['proj-2-desc']);
   s('proj-3-title-el', t['proj-3-title']); s('proj-3-desc-el', t['proj-3-desc']);
   s('proj-4-title-el', t['proj-4-title']); s('proj-4-desc-el', t['proj-4-desc']);
   s('proj-5-title-el', t['proj-5-title']); s('proj-5-desc-el', t['proj-5-desc']);
