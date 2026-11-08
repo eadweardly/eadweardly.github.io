@@ -395,6 +395,9 @@ const translations = {
     'proj-1-title': 'Personal Portfolio', 'proj-1-desc': 'My personal web portfolio built with HTML, CSS, and JavaScript featuring glassmorphism design and 3D effects.',
     'proj-2-title': 'Student Management System', 'proj-2-desc': 'A web-based CRUD system for managing student records with PHP and MySQL database backend.',
     'proj-4-title': 'Web Development Activities', 'proj-4-desc': 'A collection of my activities and exercises for my Web Development subject, starting with a Bento-style layout.',
+    'proj-5-title': 'EdVantage Calyx Tech', 'proj-5-desc': 'A neon-themed digital store front for tech gadgets and accessories, built with HTML, CSS, and JavaScript.',
+    'proj-6-title': 'NexTech', 'proj-6-desc': 'A PHP and MySQL e-commerce site for technology products with cart, checkout, payment, and feedback pages. Group project for Information Management.',
+    'proj-7-title': 'IsKonek', 'proj-7-desc': 'A student portal built with PHP and MySQL featuring forums, announcements, a calendar, and section and subject management.',
     'proj-3-title': 'More Coming Soon', 'proj-3-desc': 'Currently working on new projects involving data analytics, AI tools, and modern web apps. Stay tuned!',
     'certs-eyebrow': 'ACHIEVEMENTS', 'certs-title': 'Certificates & <span class="gradient-text">Awards</span>',
     'cert-1-name': 'Certified Yearning Expert', 'cert-1-issuer': 'Institute of Deep Feelings',
@@ -451,6 +454,9 @@ const translations = {
     'proj-1-title': 'Personal na Portfolio', 'proj-1-desc': 'Ang aking personal na web portfolio na ginawa gamit ang HTML, CSS, at JavaScript na may glassmorphism design at 3D effects.',
     'proj-2-title': 'Student Management System', 'proj-2-desc': 'Isang web-based CRUD system para sa pamamahala ng mga rekord ng mag-aaral gamit ang PHP at MySQL database backend.',
     'proj-4-title': 'Web Development Activities', 'proj-4-desc': 'Koleksyon ng aking mga aktibidad at ehersisyo para sa Web Development, simula sa Bento-style na layout.',
+    'proj-5-title': 'EdVantage Calyx Tech', 'proj-5-desc': 'Isang neon-themed na digital store para sa mga tech gadget at accessories, gawa sa HTML, CSS, at JavaScript.',
+    'proj-6-title': 'NexTech', 'proj-6-desc': 'Isang PHP at MySQL na e-commerce site para sa mga produktong teknolohiya na may cart, checkout, payment, at feedback pages. Group project para sa Information Management.',
+    'proj-7-title': 'IsKonek', 'proj-7-desc': 'Isang student portal na gawa sa PHP at MySQL na may forums, announcements, calendar, at pamamahala ng section at subject.',
     'proj-3-title': 'Marami Pang Darating', 'proj-3-desc': 'Kasalukuyang nagtatrabaho sa mga bagong proyekto na may kinalaman sa data analytics, AI tools, at modernong web apps. Abangan!',
     'certs-eyebrow': 'MGA NAGAWA', 'certs-title': 'Mga Sertipiko at <span class="gradient-text">Parangal</span>',
     'cert-1-name': 'Certified Yearning Expert', 'cert-1-issuer': 'Institute of Deep Feelings',
@@ -508,6 +514,9 @@ function setLang(lang) {
   s('proj-2-title-el', t['proj-2-title']); s('proj-2-desc-el', t['proj-2-desc']);
   s('proj-3-title-el', t['proj-3-title']); s('proj-3-desc-el', t['proj-3-desc']);
   s('proj-4-title-el', t['proj-4-title']); s('proj-4-desc-el', t['proj-4-desc']);
+  s('proj-5-title-el', t['proj-5-title']); s('proj-5-desc-el', t['proj-5-desc']);
+  s('proj-6-title-el', t['proj-6-title']); s('proj-6-desc-el', t['proj-6-desc']);
+  s('proj-7-title-el', t['proj-7-title']); s('proj-7-desc-el', t['proj-7-desc']);
   s('certs-eyebrow-el', t['certs-eyebrow']); s('certs-title-el', t['certs-title']);
   s('cert-1-name-el', t['cert-1-name']); s('cert-1-issuer-el', t['cert-1-issuer']);
   s('cert-2-name-el', t['cert-2-name']); s('cert-2-issuer-el', t['cert-2-issuer']);
