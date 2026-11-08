@@ -78,19 +78,37 @@ function typeLoop() {
 typeLoop();
 const sections  = document.querySelectorAll('section[id]');
 const navLinks  = document.querySelectorAll('.sidebar-nav .nav-link, #mobile-nav .nav-link');
-function updateActiveLink() {
-  let current = '';
-  sections.forEach(sec => {
-    const top = sec.getBoundingClientRect().top;
-    if (top <= 120) current = sec.getAttribute('id');
-  });
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === '#' + current) link.classList.add('active');
-  });
+const scrollBar = document.getElementById('scrollProgress');
+const btt = document.getElementById('backToTop');
+let sectionTops = [], activeId = null, docMax = 1;
+function measureLayout() {
+  const y = window.scrollY;
+  sectionTops = Array.from(sections, sec => ({ id: sec.id, top: sec.getBoundingClientRect().top + y }));
+  docMax = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
 }
-window.addEventListener('scroll', updateActiveLink, { passive: true });
-updateActiveLink();
+function updateOnScroll() {
+  const y = window.scrollY;
+  let current = '';
+  for (const s of sectionTops) if (s.top - y <= 120) current = s.id;
+  if (current !== activeId) {
+    activeId = current;
+    navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + current));
+  }
+  if (scrollBar) scrollBar.style.transform = `scaleX(${Math.min(1, y / docMax)})`;
+  if (btt) btt.classList.toggle('visible', y > 400);
+}
+let scrollTicking = false;
+window.addEventListener('scroll', () => {
+  if (scrollTicking) return;
+  scrollTicking = true;
+  requestAnimationFrame(() => { scrollTicking = false; updateOnScroll(); });
+}, { passive: true });
+function refreshLayout() { measureLayout(); updateOnScroll(); }
+refreshLayout();
+window.addEventListener('load', refreshLayout);
+window.addEventListener('resize', refreshLayout);
+if ('ResizeObserver' in window) new ResizeObserver(refreshLayout).observe(document.body);
+if (btt) btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function(e) {
     const target = document.querySelector(this.getAttribute('href'));
@@ -159,53 +177,53 @@ window.addEventListener('resize', () => {
   }
 });
 
+const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
 const wrap3d = document.getElementById('hero3dWrap');
-if (wrap3d) {
+if (wrap3d && finePointer) {
+  let tiltFrame = 0, tiltEv = null;
   wrap3d.addEventListener('mousemove', e => {
-    const r = wrap3d.getBoundingClientRect();
-    const x = (e.clientX - r.left) / r.width  - 0.5;
-    const y = (e.clientY - r.top)  / r.height - 0.5;
-    wrap3d.style.transform = `translateY(0) rotateY(${x * 28}deg) rotateX(${-y * 28}deg) scale(1.06)`;
-  });
+    tiltEv = e;
+    if (tiltFrame) return;
+    tiltFrame = requestAnimationFrame(() => {
+      tiltFrame = 0;
+      const r = wrap3d.getBoundingClientRect();
+      const x = (tiltEv.clientX - r.left) / r.width  - 0.5;
+      const y = (tiltEv.clientY - r.top)  / r.height - 0.5;
+      wrap3d.style.transform = `translateY(0) rotateY(${x * 28}deg) rotateX(${-y * 28}deg) scale(1.06)`;
+    });
+  }, { passive: true });
   wrap3d.addEventListener('mouseleave', () => {
     wrap3d.style.transform = '';
   });
 }
 
-const scrollBar = document.getElementById('scrollProgress');
-function updateScrollProgress() {
-  const scrollTop = window.scrollY;
-  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-  if (scrollBar) scrollBar.style.width = pct + '%';
-}
-window.addEventListener('scroll', updateScrollProgress, { passive: true });
-
-const btt = document.getElementById('backToTop');
-window.addEventListener('scroll', () => {
-  if (!btt) return;
-  if (window.scrollY > 400) btt.classList.add('visible');
-  else btt.classList.remove('visible');
-}, { passive: true });
-if (btt) btt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
 const dot  = document.getElementById('cursorDot');
 const ring = document.getElementById('cursorRing');
-let mx = -200, my = -200, rx = -200, ry = -200;
-window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-(function animCursor() {
-  if (dot)  { dot.style.left  = mx + 'px'; dot.style.top  = my + 'px'; }
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
-  if (ring) { ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; }
-  requestAnimationFrame(animCursor);
-})();
-document.querySelectorAll('a, button, .quick-card, .glass-card, .project-grid-card, .cert-card, .interest-tag, .hero-profile-3d-wrap').forEach(el => {
-  el.addEventListener('mouseenter', () => { dot?.classList.add('hovered'); ring?.classList.add('hovered'); });
-  el.addEventListener('mouseleave', () => { dot?.classList.remove('hovered'); ring?.classList.remove('hovered'); });
-});
-document.addEventListener('mouseleave', () => { if (dot) dot.style.opacity = '0'; if (ring) ring.style.opacity = '0'; });
-document.addEventListener('mouseenter', () => { if (dot) dot.style.opacity = '1'; if (ring) ring.style.opacity = '0.6'; });
+if (finePointer && (dot || ring)) {
+  let mx = -200, my = -200, rx = -200, ry = -200, cursorRaf = 0;
+  const place = (el, x, y) => { if (el) el.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`; };
+  function animCursor() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    place(dot, mx, my);
+    place(ring, rx, ry);
+    cursorRaf = (Math.abs(mx - rx) > 0.1 || Math.abs(my - ry) > 0.1) ? requestAnimationFrame(animCursor) : 0;
+  }
+  place(dot, mx, my); place(ring, rx, ry);
+  window.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    if (!cursorRaf) cursorRaf = requestAnimationFrame(animCursor);
+  }, { passive: true });
+  const HOVER_SEL = 'a, button, .quick-card, .glass-card, .project-grid-card, .cert-card, .interest-tag, .hero-profile-3d-wrap';
+  document.addEventListener('mouseover', e => {
+    const on = !!(e.target.closest && e.target.closest(HOVER_SEL));
+    dot?.classList.toggle('hovered', on);
+    ring?.classList.toggle('hovered', on);
+  }, { passive: true });
+  document.addEventListener('mouseleave', () => { if (dot) dot.style.opacity = '0'; if (ring) ring.style.opacity = '0'; });
+  document.addEventListener('mouseenter', () => { if (dot) dot.style.opacity = '1'; if (ring) ring.style.opacity = '0.6'; });
+}
 
 const sparkColors = ['#6a5acd','#818cf8','#a78bfa','#ec4899','#f97316','#fff'];
 document.addEventListener('click', e => {
@@ -221,55 +239,75 @@ document.addEventListener('click', e => {
 });
 
 const canvas = document.getElementById('particle-canvas');
+const desktopMQ = window.matchMedia('(min-width: 992px)');
+const reduceMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
 if (canvas) {
   const ctx = canvas.getContext('2d');
-  let W, H, particles = [], mouse = { x: -9999, y: -9999 };
+  const TAU = Math.PI * 2, LINK = 130, LINK2 = LINK * LINK, MOUSE_R = 100, MOUSE_R2 = MOUSE_R * MOUSE_R;
+  const FRAME_MS = 1000 / 30;
+  let W = 0, H = 0, particles = [], running = false, last = 0;
+  const mouse = { x: -9999, y: -9999 };
   function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
   resize();
   window.addEventListener('resize', resize);
-  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-  for (let i = 0; i < 80; i++) {
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; }, { passive: true });
+  const count = Math.min(45, Math.round(W * H / 32000));
+  for (let i = 0; i < count; i++) {
     particles.push({ x: Math.random()*W, y: Math.random()*H, r: 1+Math.random()*2, vx: (Math.random()-.5)*.4, vy: (Math.random()-.5)*.4 });
   }
-  function isDark() { return document.documentElement.getAttribute('data-theme') === 'dark'; }
-  function drawParticles() {
-    ctx.clearRect(0,0,W,H);
-    const color = isDark() ? '129,140,248' : '106,90,205';
-    particles.forEach((p, i) => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(${color},0.55)`;
-      ctx.fill();
-      particles.forEach((p2, j) => {
-        if (j <= i) return;
-        const dx = p.x-p2.x, dy = p.y-p2.y;
-        const dist = Math.sqrt(dx*dx+dy*dy);
-        if (dist < 130) {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = `rgba(${color},${0.18*(1-dist/130)})`;
-          ctx.lineWidth = 0.7;
-          ctx.stroke();
+  const isDark = () => document.documentElement.getAttribute('data-theme') === 'dark';
+  const shouldRun = () => desktopMQ.matches && !reduceMotionMQ.matches && !document.hidden;
+  function draw(step) {
+    ctx.clearRect(0, 0, W, H);
+    const rgb = isDark() ? '129,140,248' : '106,90,205';
+    ctx.fillStyle = `rgba(${rgb},0.55)`;
+    ctx.beginPath();
+    for (const p of particles) {
+      p.x += p.vx * step; p.y += p.vy * step;
+      if (p.x < 0) p.x = W; else if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; else if (p.y > H) p.y = 0;
+      ctx.moveTo(p.x + p.r, p.y);
+      ctx.arc(p.x, p.y, p.r, 0, TAU);
+    }
+    ctx.fill();
+    ctx.strokeStyle = `rgb(${rgb})`;
+    ctx.lineWidth = 0.7;
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+      for (let j = i + 1; j < particles.length; j++) {
+        const q = particles[j];
+        const dx = p.x - q.x, dy = p.y - q.y;
+        const d2 = dx*dx + dy*dy;
+        if (d2 < LINK2) {
+          ctx.globalAlpha = 0.18 * (1 - Math.sqrt(d2) / LINK);
+          ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
         }
-      });
-      const mdx = p.x-mouse.x, mdy = p.y-mouse.y;
-      const md = Math.sqrt(mdx*mdx+mdy*mdy);
-      if (md < 100) {
-        ctx.beginPath();
-        ctx.moveTo(p.x, p.y);
-        ctx.lineTo(mouse.x, mouse.y);
-        ctx.strokeStyle = `rgba(${color},${0.35*(1-md/100)})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
       }
-    });
-    requestAnimationFrame(drawParticles);
+    }
+    ctx.lineWidth = 1;
+    for (const p of particles) {
+      const dx = p.x - mouse.x, dy = p.y - mouse.y;
+      const d2 = dx*dx + dy*dy;
+      if (d2 < MOUSE_R2) {
+        ctx.globalAlpha = 0.35 * (1 - Math.sqrt(d2) / MOUSE_R);
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
+      }
+    }
+    ctx.globalAlpha = 1;
   }
-  drawParticles();
+  function frame(t) {
+    if (!shouldRun()) { running = false; return; }
+    requestAnimationFrame(frame);
+    if (t - last < FRAME_MS) return;
+    const step = last ? Math.min(3, (t - last) / 16.67) : 1;
+    last = t;
+    draw(step);
+  }
+  function start() { if (running || !shouldRun()) return; running = true; last = 0; requestAnimationFrame(frame); }
+  document.addEventListener('visibilitychange', start);
+  desktopMQ.addEventListener('change', start);
+  reduceMotionMQ.addEventListener('change', start);
+  start();
 }
 
 const codeLayer = document.getElementById('codeFloatLayer');
@@ -290,8 +328,8 @@ const snippets = [
   'npm run portfolio',
   'data-theme="dark"',
 ];
-if (codeLayer) {
-  snippets.forEach((text, i) => {
+if (codeLayer && window.matchMedia('(min-width: 992px)').matches && !reduceMotionMQ.matches) {
+  snippets.slice(0, 8).forEach((text, i) => {
     const el = document.createElement('div');
     el.className = 'code-snippet-float';
     el.textContent = text;
@@ -509,15 +547,10 @@ function setLang(lang) {
   const el = document.getElementById('manilaTime');
   const elMob = document.getElementById('manilaTimeMob');
   if (!el && !elMob) return;
+  const fmt = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Manila', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
   function update() {
-    const now = new Date();
-    const manila = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Manila' }));
-    let h = manila.getHours();
-    const m = String(manila.getMinutes()).padStart(2, '0');
-    const s = String(manila.getSeconds()).padStart(2, '0');
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    h = h % 12 || 12;
-    const time = `${String(h).padStart(2,'0')}:${m}:${s} ${ampm}`;
+    if (document.hidden) return;
+    const time = fmt.format(new Date()).replace(/\u202f/g, ' ');
     if (el) el.textContent = time;
     if (elMob) elMob.textContent = time;
   }
